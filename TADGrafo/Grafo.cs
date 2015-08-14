@@ -11,7 +11,7 @@ namespace TADGrafo
     public class Graph<T> :IEnumerable<T>
     {
         protected NodeList<T> verticeSet;
-        protected List<Aresta<T>> listaAresta;
+        protected List<Aresta<T>> arestaList;
         protected Collection<T> coleçao;
         public Graph() : this(null) { }
         public Graph(NodeList<T> verticeSet)
@@ -19,7 +19,7 @@ namespace TADGrafo
             if (verticeSet == null)
             {
                 this.verticeSet = new NodeList<T>();
-                this.listaAresta = new List<Aresta<T>>();
+                this.arestaList = new List<Aresta<T>>();
             }
             else
                 this.verticeSet = verticeSet;
@@ -31,7 +31,7 @@ namespace TADGrafo
         }
         public Aresta<T> InserirAresta(Vertice<T> from, Vertice<T> to, int cost)
         {
-            listaAresta.Add(new Aresta<T>(from, to, cost));
+            arestaList.Add(new Aresta<T>(from, to, cost));
             to.Neighbors.Add(from);
             from.Neighbors.Add(to);
             return new Aresta<T>(from, to, cost);
@@ -40,19 +40,19 @@ namespace TADGrafo
         public Aresta<T> InserirArestaDirecionada(Vertice<T> from, Vertice<T> to, int cost)
         {
             from.Neighbors.Add(to);
-            listaAresta.Add(new Aresta<T>(from, to, cost));
+            arestaList.Add(new Aresta<T>(from, to, cost));
             return new Aresta<T>(from, to, cost);
         }
         public bool RemoverVertice(Vertice<T> vertice)
         {
             Vertice<T> nodeToRemove = (Vertice<T>)verticeSet.FindByValue(vertice.Value);
-            var arestaToRemove = listaAresta.Where(a => a.from == nodeToRemove || a.to == nodeToRemove);
+            var arestaToRemove = arestaList.Where(a => a.from == nodeToRemove || a.to == nodeToRemove);
             if (nodeToRemove == null)
                 return false;
             verticeSet.Remove(nodeToRemove);
             foreach (Aresta<T> arestaItem in arestaToRemove)
             {
-                listaAresta.Remove(arestaItem);
+                arestaList.Remove(arestaItem);
             }
             foreach (Vertice<T> refNode in verticeSet)
             {
@@ -71,7 +71,7 @@ namespace TADGrafo
         }
         public List<Aresta<T>> Arestas()
         {
-            return listaAresta;
+            return arestaList;
         }
         public bool eDirecionado(Aresta<T> aresta)
         {
@@ -82,7 +82,7 @@ namespace TADGrafo
         public List<Aresta<T>> arestasIncidentes(Vertice<T> node)
         {
             List<Aresta<T>> lista = new List<Aresta<T>>();
-            foreach(Aresta<T> aresta in listaAresta){
+            foreach(Aresta<T> aresta in arestaList){
                 if (aresta.from == node || aresta.to == node)
                     lista.Add(aresta);
             }
