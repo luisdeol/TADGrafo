@@ -35,7 +35,7 @@ namespace TADGrafo
             Aresta<string> aresta2 = grafo.InserirArestaDirecionada(v1, v3, 2);
             Aresta<string> aresta3 = grafo.InserirArestaDirecionada(v1, v4, 3);
             Aresta<string> aresta4 = grafo.InserirAresta(v2, v3, 3);
-
+            Console.WriteLine("Lista de arestas: ");
             List<Aresta<string>> listaArestas = grafo.Arestas();
             foreach (Aresta<string> arestaItem in listaArestas)
             {
@@ -63,6 +63,16 @@ namespace TADGrafo
             foreach (Vertice<string> vertice in lista)
             {
                 Console.WriteLine(vertice.Value.ToString());
+            }
+            Aresta<string> arestaSubst = new Aresta<string>(v3, v4);
+            grafo.substituirAresta(aresta1, arestaSubst);
+            Console.WriteLine("\nNova Lista de Arestas");
+            List<Aresta<string>> listaSubst = grafo.Arestas();
+            foreach (Aresta<string> arestaItem in listaSubst)
+            {
+                Console.WriteLine(Aresta<string>.GetAresta(arestaItem));
+                if (!grafo.eDirecionado(arestaItem))
+                    Console.WriteLine(arestaItem.to.Value.ToString() + " - " + arestaItem.from.Value.ToString());
             }
             Console.Read();
         }

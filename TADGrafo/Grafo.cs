@@ -110,6 +110,12 @@ namespace TADGrafo
             Vertice<T> vertice = (Vertice<T>)verticeSet.FindByValue(antigoVertice.Value);
             vertice.Value = novoVertice.Value;
         }
+        public void substituirAresta(Aresta<T> antigaAresta, Aresta<T> novaAresta)
+        {
+            int index = arestaList.FindIndex(a=>a.from==antigaAresta.from && a.to==antigaAresta.to);
+            if (index > -1)
+                arestaList[index] = novaAresta;
+        }
         public IEnumerator<T> GetEnumerator()
         {
             return coleçao.GetEnumerator();
