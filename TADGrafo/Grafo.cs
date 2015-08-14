@@ -10,24 +10,24 @@ namespace TADGrafo
 {
     public class Graph<T> :IEnumerable<T>
     {
-        protected NodeList<T> nodeSet;
+        protected NodeList<T> verticeSet;
         protected List<Aresta<T>> listaAresta;
         protected Collection<T> coleçao;
         public Graph() : this(null) { }
-        public Graph(NodeList<T> nodeSet)
+        public Graph(NodeList<T> verticeSet)
         {
-            if (nodeSet == null)
+            if (verticeSet == null)
             {
-                this.nodeSet = new NodeList<T>();
+                this.verticeSet = new NodeList<T>();
                 this.listaAresta = new List<Aresta<T>>();
             }
             else
-                this.nodeSet = nodeSet;
+                this.verticeSet = verticeSet;
         }
-        public Vertice<T> InserirVertice(Vertice<T> node)
+        public Vertice<T> InserirVertice(Vertice<T> vertice)
         {
-            nodeSet.Add(node);
-            return new Vertice<T>(node.Value);
+            verticeSet.Add(vertice);
+            return new Vertice<T>(vertice.Value);
         }
         public Aresta<T> InserirAresta(Vertice<T> from, Vertice<T> to, int cost)
         {
@@ -43,18 +43,18 @@ namespace TADGrafo
             listaAresta.Add(new Aresta<T>(from, to, cost));
             return new Aresta<T>(from, to, cost);
         }
-        public bool RemoverVertice(Vertice<T> node)
+        public bool RemoverVertice(Vertice<T> vertice)
         {
-            Vertice<T> nodeToRemove = (Vertice<T>)nodeSet.FindByValue(node.Value);
+            Vertice<T> nodeToRemove = (Vertice<T>)verticeSet.FindByValue(vertice.Value);
             var arestaToRemove = listaAresta.Where(a => a.from == nodeToRemove || a.to == nodeToRemove);
             if (nodeToRemove == null)
                 return false;
-            nodeSet.Remove(nodeToRemove);
+            verticeSet.Remove(nodeToRemove);
             foreach (Aresta<T> arestaItem in arestaToRemove)
             {
                 listaAresta.Remove(arestaItem);
             }
-            foreach (Vertice<T> refNode in nodeSet)
+            foreach (Vertice<T> refNode in verticeSet)
             {
                 int index = refNode.Neighbors.IndexOf(nodeToRemove);
                 if (index != -1)
@@ -67,23 +67,17 @@ namespace TADGrafo
         }
         public NodeList<T> Vertices()
         {
-            return nodeSet;
+            return verticeSet;
         }
         public List<Aresta<T>> Arestas()
         {
             return listaAresta;
         }
-        public bool eDirecionado(Vertice<T> node)
+        public bool eDirecionado(Aresta<T> aresta)
         {
-            foreach (Vertice<T> vertice in node.Neighbors)
-            {
-                if (!vertice.Neighbors.Contains(node))
-                {
-                    return true;
-                }
-                else return false;
-            }
-            return false;
+            if((aresta.from.Neighbors.Contains(aresta.to))&&(aresta.to.Neighbors.Contains(aresta.from)))
+                return false;
+            else return true;
         }
         public List<Aresta<T>> arestasIncidentes(Vertice<T> node)
         {
@@ -110,6 +104,11 @@ namespace TADGrafo
         public Vertice<T>[] finalVertices(Aresta<T> aresta)
         {
             return new Vertice<T>[2] { aresta.from, aresta.to};
+        }
+        public void substituirVertice(Vertice<T> antigoVertice, Vertice<T> novoVertice)
+        {
+            Vertice<T> vertice = (Vertice<T>)verticeSet.FindByValue(antigoVertice.Value);
+            vertice.Value = novoVertice.Value;
         }
         public IEnumerator<T> GetEnumerator()
         {

@@ -40,6 +40,8 @@ namespace TADGrafo
             foreach (Aresta<string> arestaItem in listaArestas)
             {
                 Console.WriteLine(Aresta<string>.GetAresta(arestaItem));
+                if(!grafo.eDirecionado(arestaItem))
+                    Console.WriteLine(arestaItem.to.Value.ToString()+" - "+ arestaItem.from.Value.ToString());
             }
          
             //eAdjacente()
@@ -53,6 +55,15 @@ namespace TADGrafo
             //finalVertice
             Vertice<string>[] verticesFinais = grafo.finalVertices(aresta1);
             Console.WriteLine(verticesFinais[0].Value.ToString()+ " - " +verticesFinais[1].Value.ToString());
+            //Subistuir Vertice
+            Console.WriteLine("\nNova Lista de Vertices: ");
+            Vertice<string> verticeSubst =new Vertice<string>("Galery.htm");
+            grafo.substituirVertice(v1, verticeSubst);
+            var listaSubstituidos = grafo.Vertices().ToList();
+            foreach (Vertice<string> vertice in lista)
+            {
+                Console.WriteLine(vertice.Value.ToString());
+            }
             Console.Read();
         }
     }
