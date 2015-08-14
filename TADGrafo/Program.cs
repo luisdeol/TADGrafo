@@ -12,10 +12,10 @@ namespace TADGrafo
         {
             Graph<string> grafo = new Graph<string>();
             
-            GraphNode<string> v1 = new GraphNode<string>("Index.htm");
-            GraphNode<string> v2 = new GraphNode<string>("Home.htm");
-            GraphNode<string> v3 = new GraphNode<string>("Contact.htm");
-            GraphNode<string> v4 = new GraphNode<string>("About.htm");
+            Vertice<string> v1 = new Vertice<string>("Index.htm");
+            Vertice<string> v2 = new Vertice<string>("Home.htm");
+            Vertice<string> v3 = new Vertice<string>("Contact.htm");
+            Vertice<string> v4 = new Vertice<string>("About.htm");
             //InserirVertice()
             grafo.InserirVertice(v1);
             grafo.InserirVertice(v2);
@@ -49,8 +49,7 @@ namespace TADGrafo
             //removerVertice
             //bool verticeRemovido = grafo.RemoverVertice(v2);
 
-            Console.WriteLine(Aresta<string>.GetAresta(listaArestas.FirstOrDefault(a=>a.from==v2)));
-
+            Console.WriteLine(grafo.oposto(v1, aresta1).Value.ToString());
             Console.Read();
         }
     }

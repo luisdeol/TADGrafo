@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace TADGrafo
 {
-    public class GraphNode<T>: Node<T>
+    public class Vertice<T>: Node<T>
     {
         private List<int> costs;
 
-        public GraphNode() : base() { } 
-        public GraphNode(T value) : base(value) { }
-        public GraphNode(T value, NodeList<T> neighbors) : base(value, neighbors) { }
+        public Vertice() : base() { } 
+        public Vertice(T value) : base(value) { }
+        public Vertice(T value, NodeList<T> neighbors) : base(value, neighbors) { }
 
         new public NodeList<T> Neighbors
         {
             get
             {
-                if (base.Neighbors == null)
-                    base.Neighbors = new NodeList<T>();
+                if (base.Vizinhos == null)
+                    base.Vizinhos = new NodeList<T>();
 
-                return base.Neighbors;
+                return base.Vizinhos;
             }
         }
 

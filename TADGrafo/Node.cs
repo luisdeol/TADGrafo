@@ -9,13 +9,13 @@ namespace TADGrafo
     public class Node<T>
     {
         private T data;
-        private NodeList<T> neighbors = null;
+        private NodeList<T> vizinhos = null;
         public Node() { }
         public Node(T data) : this(data, null) { }
-        public Node(T data, NodeList<T> neighbors)
+        public Node(T data, NodeList<T> vizinhos)
         {
             this.data = data;
-            this.neighbors = neighbors;
+            this.vizinhos = vizinhos;
         }
 
         public T Value
@@ -30,15 +30,15 @@ namespace TADGrafo
             }
         }
 
-        protected NodeList<T> Neighbors
+        protected NodeList<T> Vizinhos
         {
             get
             {
-                return neighbors;
+                return vizinhos;
             }
             set
             {
-                neighbors = value;
+                vizinhos = value;
             }
         }
     }

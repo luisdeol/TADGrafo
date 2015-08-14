@@ -42,8 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aresta.cs" />
-    <Compile Include="Graph.cs" />
-    <Compile Include="GraphNode.cs" />
+    <Compile Include="Grafo.cs" />
+    <Compile Include="Vertice.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="NodeList.cs" />
     <Compile Include="Program.cs" />
