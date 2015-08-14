@@ -48,8 +48,11 @@ namespace TADGrafo
 
             //removerVertice
             //bool verticeRemovido = grafo.RemoverVertice(v2);
-
+            //oposto
             Console.WriteLine(grafo.oposto(v1, aresta1).Value.ToString());
+            //finalVertice
+            Vertice<string>[] verticesFinais = grafo.finalVertices(aresta1);
+            Console.WriteLine(verticesFinais[0].Value.ToString()+ " - " +verticesFinais[1].Value.ToString());
             Console.Read();
         }
     }

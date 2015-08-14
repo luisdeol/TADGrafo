@@ -107,7 +107,10 @@ namespace TADGrafo
             return from.Neighbors.Contains(to) || to.Neighbors.Contains(from);
         }
 
-        
+        public Vertice<T>[] finalVertices(Aresta<T> aresta)
+        {
+            return new Vertice<T>[2] { aresta.from, aresta.to};
+        }
         public IEnumerator<T> GetEnumerator()
         {
             return coleçao.GetEnumerator();
