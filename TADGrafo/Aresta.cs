@@ -18,9 +18,6 @@ namespace TADGrafo
             this.to = to;
             this.Cost = cost;
             }
-        static public string GetAresta(Aresta<T> aresta)
-        {
-            return aresta.from.Value.ToString() + " - " + aresta.to.Value.ToString();
-        }
+        
     }
 }

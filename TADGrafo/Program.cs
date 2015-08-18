@@ -10,7 +10,7 @@ namespace TADGrafo
     {
         static void Main(string[] args)
         {
-            Graph<string> grafo = new Graph<string>();
+            Grafo<string> grafo = new Grafo<string>();
             
             Vertice<string> v1 = new Vertice<string>("Index.htm");
             Vertice<string> v2 = new Vertice<string>("Home.htm");
@@ -39,7 +39,7 @@ namespace TADGrafo
             List<Aresta<string>> listaArestas = grafo.Arestas();
             foreach (Aresta<string> arestaItem in listaArestas)
             {
-                Console.WriteLine(Aresta<string>.GetAresta(arestaItem));
+                Console.WriteLine(grafo.GetAresta(arestaItem));
                 if(!grafo.eDirecionado(arestaItem))
                     Console.WriteLine(arestaItem.to.Value.ToString()+" - "+ arestaItem.from.Value.ToString());
             }
@@ -47,7 +47,7 @@ namespace TADGrafo
             //eAdjacente()
             if (grafo.eAdjacente(v1, v2)) Console.WriteLine(v1.Value.ToString() + " é adjacente de " + v2.Value.ToString());
             else Console.WriteLine(v1.Value.ToString() + " não é adjacente de " + v2.Value.ToString());
-
+            /*
             //removerVertice
             //bool verticeRemovido = grafo.RemoverVertice(v2);
             //oposto
@@ -73,7 +73,8 @@ namespace TADGrafo
                 Console.WriteLine(Aresta<string>.GetAresta(arestaItem));
                 if (!grafo.eDirecionado(arestaItem))
                     Console.WriteLine(arestaItem.to.Value.ToString() + " - " + arestaItem.from.Value.ToString());
-            }
+            }*/
+            grafo.MostrarMatrizdeCusto();
             Console.Read();
         }
     }

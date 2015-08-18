@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace TADGrafo
 {
-    public class Graph<T> :IEnumerable<T>
+    public class Grafo<T> :IEnumerable<T>
     {
         protected NodeList<T> verticeSet;
         protected List<Aresta<T>> arestaList;
         protected Collection<T> coleçao;
-        public Graph() : this(null) { }
-        public Graph(NodeList<T> verticeSet)
+        public Grafo() : this(null) { }
+        public Grafo(NodeList<T> verticeSet)
         {
             if (verticeSet == null)
             {
@@ -31,9 +31,9 @@ namespace TADGrafo
         }
         public Aresta<T> InserirAresta(Vertice<T> from, Vertice<T> to, int cost)
         {
-            arestaList.Add(new Aresta<T>(from, to, cost));
             to.Neighbors.Add(from);
             from.Neighbors.Add(to);
+            arestaList.Add(new Aresta<T>(from, to, cost));
             return new Aresta<T>(from, to, cost);
         }
         
@@ -65,19 +65,17 @@ namespace TADGrafo
             }
             return true;
         }
-        public NodeList<T> Vertices()
-        {
-            return verticeSet;
-        }
-        public List<Aresta<T>> Arestas()
-        {
-            return arestaList;
-        }
+        
         public bool eDirecionado(Aresta<T> aresta)
         {
-            if((aresta.from.Neighbors.Contains(aresta.to))&&(aresta.to.Neighbors.Contains(aresta.from)))
+            try
+            {
+                bool duplaDirecao = (aresta.from.Neighbors.Contains(aresta.to)) && (aresta.to.Neighbors.Contains(aresta.from));
+                if(duplaDirecao)
                 return false;
-            else return true;
+                return true;
+            }
+            catch { return true; }
         }
         public List<Aresta<T>> arestasIncidentes(Vertice<T> node)
         {
@@ -115,6 +113,43 @@ namespace TADGrafo
             int index = arestaList.FindIndex(a=>a.from==antigaAresta.from && a.to==antigaAresta.to);
             if (index > -1)
                 arestaList[index] = novaAresta;
+        }
+        public List<Node<T>> Vertices()
+        {
+            return verticeSet.ToList();
+        }
+        public List<Aresta<T>> Arestas()
+        {
+            return arestaList;
+        }
+        public void MostrarMatrizdeCusto()
+        {
+            List<Node<T>> listaVertice = Vertices();
+            List<Aresta<T>> listaAresta = arestaList;
+            int[,] matrizDeCusto=new int[listaVertice.Count,listaVertice.Count];
+            for (int i = 0; i < listaVertice.Count; i++) {
+                for (int j = 0; j < listaVertice.Count; j++)
+                {
+                    if (arestaList.Find(a => a.from == listaVertice.ElementAt(i) && a.to == listaVertice.ElementAt(j)) != null)
+                    {
+                        int custo = arestaList.Find(a => a.from == listaVertice.ElementAt(i) && a.to == listaVertice.ElementAt(j)).Cost;
+                        matrizDeCusto[i, j] = custo;
+                    }
+                    else if (eDirecionado(arestaList.Find(a => a.from == listaVertice.ElementAt(j) && a.to == listaVertice.ElementAt(i)))==false)
+                   {
+                       int custo = arestaList.Find(a => a.from == listaVertice.ElementAt(j) && a.to == listaVertice.ElementAt(i)).Cost;
+                        matrizDeCusto[i, j] = custo;
+                    }
+                    else { matrizDeCusto[i, j] = 0;
+                    }
+                    Console.Write(matrizDeCusto[i, j].ToString() + " ");
+                }
+                Console.WriteLine("\n");
+            }
+        }
+        public string GetAresta(Aresta<T> aresta)
+        {
+            return aresta.from.Value.ToString() + " - " + aresta.to.Value.ToString();
         }
         public IEnumerator<T> GetEnumerator()
         {
