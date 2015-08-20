@@ -31,10 +31,13 @@ namespace TADGrafo
             Console.WriteLine();
 
             //InserirVerticeDirecionado()
-            Aresta<string> aresta1 = grafo.InserirArestaDirecionada(v1, v2, 1);
-            Aresta<string> aresta2 = grafo.InserirArestaDirecionada(v1, v3, 2);
-            Aresta<string> aresta3 = grafo.InserirArestaDirecionada(v1, v4, 3);
-            Aresta<string> aresta4 = grafo.InserirAresta(v2, v3, 3);
+            Aresta<string> aresta1 = grafo.InserirAresta(v1, v2, 1);
+            Aresta<string> aresta2 = grafo.InserirAresta(v2, v3, 2);
+            Aresta<string> aresta3 = grafo.InserirAresta(v1, v3, 3);
+            Aresta<string> aresta4 = grafo.InserirAresta(v1, v4, 4);
+            //Vertice<string> verticeSubst = new Vertice<string>("Gallery.htm");
+            //grafo.substituirVertice(v1, verticeSubst);
+            //bool verticeRemovido = grafo.RemoverVertice(v2);
             Console.WriteLine("Lista de arestas: ");
             List<Aresta<string>> listaArestas = grafo.Arestas();
             foreach (Aresta<string> arestaItem in listaArestas)
@@ -47,9 +50,10 @@ namespace TADGrafo
             //eAdjacente()
             if (grafo.eAdjacente(v1, v2)) Console.WriteLine(v1.Value.ToString() + " é adjacente de " + v2.Value.ToString());
             else Console.WriteLine(v1.Value.ToString() + " não é adjacente de " + v2.Value.ToString());
+            
             /*
             //removerVertice
-            //bool verticeRemovido = grafo.RemoverVertice(v2);
+            //
             //oposto
             Console.WriteLine(grafo.oposto(v1, aresta1).Value.ToString());
             //finalVertice
@@ -74,7 +78,15 @@ namespace TADGrafo
                 if (!grafo.eDirecionado(arestaItem))
                     Console.WriteLine(arestaItem.to.Value.ToString() + " - " + arestaItem.from.Value.ToString());
             }*/
+            //Aresta<string> arestaSubst = new Aresta<string>(v3, v4);
+            //grafo.substituirAresta(aresta1, arestaSubst);
+            
+            Console.WriteLine("\nMatriz de Custo");
             grafo.MostrarMatrizdeCusto();
+            Console.WriteLine("\nMatriz de Adjacencia");
+            grafo.MostrarMatrizdeAdjacencia();
+            grafo.eEuleriano();
+            //grafo.Dijkstra(v1, v2);
             Console.Read();
         }
     }

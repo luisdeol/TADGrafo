@@ -10,9 +10,9 @@ namespace TADGrafo
     {
         public NodeList() : base() { }
 
-        public NodeList(int tamanhoInicial)
+        public NodeList(int initialSize)
         {
-            for (int i = 0; i < tamanhoInicial; i++)
+            for (int i = 0; i < initialSize; i++)
                 base.Items.Add(default(Node<T>));
         }
 

@@ -8,13 +8,12 @@ namespace TADGrafo
 {
     public class Vertice<T>: Node<T>
     {
-        private List<int> costs;
 
         public Vertice() : base() { } 
         public Vertice(T value) : base(value) { }
         public Vertice(T value, NodeList<T> neighbors) : base(value, neighbors) { }
 
-        new public NodeList<T> Neighbors
+        public NodeList<T> Neighbors
         {
             get
             {
@@ -25,14 +24,6 @@ namespace TADGrafo
             }
         }
 
-        public List<int> Costs
-        {
-            get
-            {
-                if (costs == null)
-                    costs = new List<int>();
-                return costs;
-            }
-        }
+        
     }
 }

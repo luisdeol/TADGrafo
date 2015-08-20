@@ -42,10 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aresta.cs" />
+    <Compile Include="Dijkstra.cs" />
     <Compile Include="Grafo.cs" />
+    <Compile Include="NodeList.cs" />
     <Compile Include="Vertice.cs" />
     <Compile Include="Node.cs" />
-    <Compile Include="NodeList.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
